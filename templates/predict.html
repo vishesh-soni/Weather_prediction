@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Parameters</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    
+    header {
+      background-color: #333;
+      padding: 10px;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+    }
+    
+    .container {
+      margin: 20px auto;
+      max-width: 600px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .submit-btn {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .submit-btn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Weather Parameters</div>
+  </header>
+
+  <div class="container">
+    <form action="/output" method='post'>
+        {% csrf_token %}
+      <div class="form-group">
+        <label>Temperature</label>
+        <input type="floatformat" name='Temperature' placeholder='9.8'>
+      </div>
+      <div class="form-group">
+        <label>Apparent Temperature</label>
+        <input type="text" name='Apparent Temperature' placeholder='7.3'>
+      </div>
+      <div class="form-group">
+        <label>Humidity</label>
+        <input type="text" name='Humidity' placeholder='0.89'>
+      </div>
+      <div class="form-group">
+        <label>Wind Speed</label>
+        <input type="text" name='Wind Speed' placeholder='14.11'>
+      </div>
+      <div class="form-group">
+        <label>Wind Bearing</label>
+        <input type="text" name='Wind Bearing' placeholder='251'>
+      </div>
+      <div class="form-group">
+        <label>Visibility</label>
+        <input type="text" name='Visibility' placeholder='15.82'>
+      </div>
+      <div class="form-group">
+        <label>Pressure</label>
+        <input type="text" name='Pressure' placeholder='1015.13'>
+      </div>
+      <button class="submit-btn" type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>

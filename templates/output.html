@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Weather Report</title>
+    <style>
+        *{
+            font-family: "Rimouski";
+        }
+        
+        body{
+            {% comment %} background-color: #293251; {% endcomment %}
+        }
+        
+        .container{
+            border-style: inset;
+            width: 300px;    
+            background-color: #FFF;
+            
+            display: block;
+            margin: 0 auto;
+            
+            border-radius: 10px;
+            padding-bottom : 20px;
+        }
+        
+        .app-title{
+            width: 300px;
+            height: 50px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .app-title p{
+            text-align: center;
+            padding: 15px;
+            margin: 0 auto;
+            font-size: 1.2em;
+            color: #293251;
+        }
+        
+        .notification{
+            background-color: #f8d7da;
+            display: none;
+        }
+        
+        .notification p{
+            color: #721c24;
+            font-size: 1.2em;
+            margin: 0;
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        .weather-container{
+            width: 300px;
+            height: 260px;
+            background-color: #F4F9FF;
+        }
+        
+        .weather-icon{
+            width: 300px;
+            height: 128px;
+        }
+        
+        .weather-icon img{
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .temperature-value{
+            width: 300px;
+            height:60px;
+        }
+        
+        .temperature-value p{
+            padding: 0;
+            margin: 0;
+            color: #293251;
+            font-size: 4em;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .temperature-value p:hover{
+            
+        }
+        
+        .temperature-value span{
+            color: #293251;
+            font-size: 0.5em;
+        }
+        
+        .temperature-description{
+           
+        }
+        
+        .temperature-description p{
+            padding: 9px;
+            margin: 0;
+            color: #293251;
+            text-align: center; 
+            font-size: 1.2em;
+        }
+        
+        .location{
+          
+        }
+        
+        .location p{
+            
+            margin: 0;
+            padding: 0;
+            color: #293251;
+            {% comment %} text-align: center; {% endcomment %}
+            font-size: 0.8em;
+        }
+
+
+        .container1{
+            width: 210px;  
+            border-style: inset;
+            background-color: #FFF;
+            
+            {% comment %} display: block; {% endcomment %}
+            {% comment %} margin: 0 auto;  {% endcomment %}
+            
+            border-radius: 10px;
+            padding-bottom : 20px;
+        }
+        
+        .app-title1{
+            width: 200px;
+            height: 50px;
+            border-radius: 0px 0px 0 0;
+        }
+        
+        .app-title1 p{
+            text-align: center;
+            padding: 15px;
+            {% comment %} margin: 0 auto; {% endcomment %}
+            font-size: 1.2em;
+            color: #293251;
+        }
+        
+        .notification1{
+            background-color: #f8d7da;
+            {% comment %} display: none; {% endcomment %}
+        }
+        
+        .notification1 p{
+            color: #721c24;
+            font-size: 0.6em;
+            margin: 0;
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        {% comment %} .weather-container1{
+            width: 200px;
+            height: 130px;
+            background-color: #F4F9FF;
+        } {% endcomment %}
+ 
+        .temperature-value1{
+            width: 200px;
+            height:20px;
+        }
+        
+        .temperature-value1 p{
+            padding: 0;
+            margin: 0;
+            color: #293251;
+            font-size: 1.3em;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .temperature-value1 p:hover{
+            
+        }
+        
+        .temperature-value1 span{
+            color: #293251;
+            font-size: 0.6em;
+        }
+        
+        .temperature-description1{
+           
+        }
+        
+        .temperature-description1 p{
+            padding: 9px;
+            margin: 0;
+            color: #293251;
+            text-align: center; 
+            font-size: 0.8em;
+        }
+        
+        .location1{
+          
+        }
+        
+        .location1 p{
+            
+            margin: 0;
+            padding: 0;
+            color: #293251;
+            {% comment %} text-align: center; {% endcomment %}
+            font-size: 0.6em;
+        }
+
+        .container2 {
+            margin: 20px;
+            max-width: 2000px;
+            background-color: #F4F9FF;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          }
+          
+          .weather-boxes {
+            display: flex;
+            justify-content: space-between;
+          }
+          
+          .weather-box {
+            flex-basis: calc(10% / 7 - 10px);
+            padding: 10px;
+            background-color: #e8e8e8;
+            border-radius: 5px;
+          }
+          
+          .weather-info {
+            margin-bottom: 10px;
+          }
+          
+          {% comment %} .weather-icon {
+            margin-bottom: 10px;
+            text-align: center;
+          } {% endcomment %}
+          
+          .weather-temperature {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+          }
+          header {
+            background-color: #333;
+            padding: 8px;
+          }
+          
+          nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+          }
+
+          .logo {
+            font-size: 26px;
+            font-weight: bold;
+          }
+          
+          .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+          }
+          
+          .nav-links li {
+            margin-right: 20px;
+          }
+          .nav-links li a:hover {
+              color: #ffd700;
+          }
+          .parameter a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 26px;
+            font-weight: bold;
+          }
+          
+          .parameter a:hover {
+            color: blue;
+            text-decoration: underline;
+          }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <header>
+            <nav>
+              <div class="logo">Weather Report</div>
+              <ul class="nav-links">
+                <li><p><span class="parameter"><a href="predict">Data Captured Ingestion</a></p></li>
+                {% comment %} <li>Parameter 2</li>
+                <li>Parameter 3</li> {% endcomment %}
+              </ul>
+            </nav>
+    </header>
+    </header>  
+    <br><br> 
+    <div class="container">
+        <div class="app-title">
+            <p>Weather : {{time}}</p>
+        </div>
+        <div class="notification"> </div>
+        <div class="weather-container">
+            {% comment %} <div class="weather-icon">
+                <img src="icons/unknown.png" alt="">
+            </div> {% endcomment %}
+            <div class="temperature-description">
+                <p> Location : India </p><br>
+            </div>
+            <div class="temperature-value">
+                <p>{{ temperature }} ° <span>C</span></p>
+            </div>
+            
+            <div class="temperature-description">
+                <p> {{ pred }} and Feels like {{Apparent_temp}} ° C</p>
+            </div>
+            <div class="temperature-description">
+                <p></p>
+            </div>
+            <div class="location">
+                <p> &nbsp;&nbsp;&nbsp; <bold>Pressure&nbsp;&nbsp;:&nbsp;&nbsp;{{Pressure}} millibars</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Wind Speed&nbsp;&nbsp;:&nbsp;&nbsp;{{Wind_speed}} km/h</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Humidity&nbsp;&nbsp;:&nbsp;&nbsp;{{Humidity}} </bold></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <br>
+
+    <div class="container2">
+        <div class="weather-boxes">
+
+    <div class="container1">
+        <div class="app-title1">
+            <p>Weather : {{times.0}}</p>
+        </div>
+        <div class="notification1"> </div>
+        <div class="weather-container1">
+
+            <div class="temperature-description1">
+                <p> Location : India </p><br>
+            </div>
+            <div class="temperature-value1">
+                <p>{{ temp.0 }} °<span>C</span></p>
+            </div>
+            
+            <div class="temperature-description1">
+                <p> {{ model.0 }} and Feels like {{app_temp.0}} ° C</p>
+            </div>
+            <div class="temperature-description1">
+                <p></p>
+            </div>
+            <div class="location1">
+                <p> &nbsp;&nbsp;&nbsp; <bold>Pressure&nbsp;&nbsp;:&nbsp;&nbsp;{{press.0}} millibars</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Wind Speed&nbsp;&nbsp;:&nbsp;&nbsp;{{wind.0}} km/h</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Humidity&nbsp;&nbsp;:&nbsp;&nbsp;{{humid.0}} </bold></p>
+            </div>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="app-title1">
+            <p>Weather : {{times.1}}</p>
+        </div>
+        <div class="notification1"> </div>
+        <div class="weather-container1">
+
+            <div class="temperature-description1">
+                <p> Location : India </p><br>
+            </div>
+            <div class="temperature-value1">
+                <p>{{ temp.1 }} °<span>C</span></p>
+            </div>
+            
+            <div class="temperature-description1">
+                <p> {{ model.1 }} and Feels like {{app_temp.1}} ° C</p>
+            </div>
+            <div class="temperature-description1">
+                <p></p>
+            </div>
+            <div class="location1">
+                <p> &nbsp;&nbsp;&nbsp; <bold>Pressure&nbsp;&nbsp;:&nbsp;&nbsp;{{press.1}} millibars</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Wind Speed&nbsp;&nbsp;:&nbsp;&nbsp;{{wind.1}} km/h</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Humidity&nbsp;&nbsp;:&nbsp;&nbsp;{{humid.1}} </bold></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container1">
+        <div class="app-title1">
+            <p>Weather : {{times.2}}</p>
+        </div>
+        <div class="notification1"> </div>
+        <div class="weather-container1">
+
+            <div class="temperature-description1">
+                <p> Location : India </p><br>
+            </div>
+            <div class="temperature-value1">
+                <p>{{ temp.2 }} °<span>C</span></p>
+            </div>
+            
+            <div class="temperature-description1">
+                <p> {{ model.2 }} and Feels like {{app_temp.2}} ° C</p>
+            </div>
+            <div class="temperature-description1">
+                <p></p>
+            </div>
+            <div class="location1">
+                <p> &nbsp;&nbsp;&nbsp; <bold>Pressure&nbsp;&nbsp;:&nbsp;&nbsp;{{press.2}} millibars</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Wind Speed&nbsp;&nbsp;:&nbsp;&nbsp;{{wind.2}} km/h</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Humidity&nbsp;&nbsp;:&nbsp;&nbsp;{{humid.2}} </bold></p>
+            </div>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="app-title1">
+            <p>Weather : {{times.3}}</p>
+        </div>
+        <div class="notification1"> </div>
+        <div class="weather-container1">
+
+            <div class="temperature-description1">
+                <p> Location : India </p><br>
+            </div>
+            <div class="temperature-value1">
+                <p>{{ temp.3 }} °<span>C</span></p>
+            </div>
+            
+            <div class="temperature-description1">
+                <p> {{ model.3 }} and Feels like {{app_temp.3}} ° C</p>
+            </div>
+            <div class="temperature-description1">
+                <p></p>
+            </div>
+            <div class="location1">
+                <p> &nbsp;&nbsp;&nbsp; <bold>Pressure&nbsp;&nbsp;:&nbsp;&nbsp;{{press.3}} millibars</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Wind Speed&nbsp;&nbsp;:&nbsp;&nbsp;{{wind.3}} km/h</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Humidity&nbsp;&nbsp;:&nbsp;&nbsp;{{humid.3}} </bold></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container1">
+        <div class="app-title1">
+            <p>Weather : {{times.4}}</p>
+        </div>
+        <div class="notification1"> </div>
+        <div class="weather-container1">
+
+            <div class="temperature-description1">
+                <p> Location : India </p><br>
+            </div>
+            <div class="temperature-value1">
+                <p>{{ temp.4 }} °<span>C</span></p>
+            </div>
+            
+            <div class="temperature-description1">
+                <p> {{ model.4 }} and Feels like {{app_temp.4}} ° C</p>
+            </div>
+            <div class="temperature-description1">
+                <p></p>
+            </div>
+            <div class="location1">
+                <p> &nbsp;&nbsp;&nbsp; <bold>Pressure&nbsp;&nbsp;:&nbsp;&nbsp;{{press.4}} millibars</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Wind Speed&nbsp;&nbsp;:&nbsp;&nbsp;{{wind.4}} km/h</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Humidity&nbsp;&nbsp;:&nbsp;&nbsp;{{humid.4}} </bold></p>
+            </div>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="app-title1">
+            <p>Weather : {{times.5}}</p>
+        </div>
+        <div class="notification1"> </div>
+        <div class="weather-container1">
+
+            <div class="temperature-description1">
+                <p> Location : India </p><br>
+            </div>
+            <div class="temperature-value1">
+                <p>{{ temp.5 }} °<span>C</span></p>
+            </div>
+            
+            <div class="temperature-description1">
+                <p> {{ model.5 }} and Feels like {{app_temp.5}} ° C</p>
+            </div>
+            <div class="temperature-description1">
+                <p></p>
+            </div>
+            <div class="location1">
+                <p> &nbsp;&nbsp;&nbsp; <bold>Pressure&nbsp;&nbsp;:&nbsp;&nbsp;{{press.5}} millibars</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Wind Speed&nbsp;&nbsp;:&nbsp;&nbsp;{{wind.5}} km/h</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Humidity&nbsp;&nbsp;:&nbsp;&nbsp;{{humid.5}} </bold></p>
+            </div>
+        </div>
+    </div>   
+    <div class="container1">
+        <div class="app-title1">
+            <p>Weather : {{times.6}}</p>
+        </div>
+        <div class="notification1"> </div>
+        <div class="weather-container1">
+
+            <div class="temperature-description1">
+                <p> Location : India </p><br>
+            </div>
+            <div class="temperature-value1">
+                <p>{{ temp.6 }} °<span>C</span></p>
+            </div>
+            
+            <div class="temperature-description1">
+                <p> {{ model.6 }} and Feels like {{app_temp.6}} ° C</p>
+            </div>
+            <div class="temperature-description1">
+                <p></p>
+            </div>
+            <div class="location1">
+                <p> &nbsp;&nbsp;&nbsp; <bold>Pressure&nbsp;&nbsp;:&nbsp;&nbsp;{{press.6}} millibars</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Wind Speed&nbsp;&nbsp;:&nbsp;&nbsp;{{wind.6}} km/h</bold></p>
+                <p> &nbsp;&nbsp;&nbsp; <bold>Humidity&nbsp;&nbsp;:&nbsp;&nbsp;{{humid.6}} </bold></p>
+            </div>
+        </div>
+    </div> 
+
+  
+    
+</body>
+</html>
